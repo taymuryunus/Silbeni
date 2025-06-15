@@ -1,93 +1,300 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SilBeni 2.0 - Dijital Gölge Simülasyonu</title>
-  <style>
-    body {
-      background: #000;
-      color: #00ffcc;
-      font-family: 'Courier New', monospace;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      overflow: hidden;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SilBeni 2.0 - Dijital Gölge Simülasyonu</
+title>
+<style>
+  @import 
+  url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+  html, body {
+    margin: 0; padding: 0; height: 100%;
+    background: black;
+    overflow: hidden;
+    font-family: 'Share Tech Mono', monospace;
+    color: #00ff99;
+    user-select: none;
+  }
+  #matrix {
+    position: fixed;
+    top:0; left:0;
+    width: 100%; height: 100%;
+    background: black;
+    z-index: 0;
+  }
+  canvas {
+    display: block;
+  }
+  #terminal {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: rgba(0,0,0,0.85);
+    border: 1px solid #00ff99;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #00ff99;
+    min-height: 60vh;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size: 1.2rem;
+    line-height: 1.4;
+  }
+  .line {
+    margin-bottom: 0.7rem;
+    position: relative;
+  }
+  .typing {
+    border-right: 2px solid #00ff99;
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink {
+    50% { border-color: transparent; }
+  }
+  /* Glitch effect */
+  .glitch {
+    color: #0f0;
+    position: relative;
+  }
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+  }
+  .glitch::before {
+    animation: glitchTop 1s infinite;
+    color: #00ffaa;
+    top: -2px;
+    z-index: -1;
+  }
+  .glitch::after {
+    animation: glitchBottom 1s infinite;
+    color: #00cc77;
+    top: 2px;
+    z-index: -1;
+  }
+  @keyframes glitchTop {
+    0% {
+      clip: rect(0, 900px, 0, 0);
+      transform: translate(0);
     }
-    .terminal {
-      background: #0a0a0a;
-      border: 1px solid #00ffcc;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
-      width: 80%;
-      max-width: 900px;
-      height: 80vh;
-      overflow-y: auto;
+    20% {
+      clip: rect(0, 900px, 15px, 0);
+      transform: translate(-2px, -2px);
     }
-    .output {
-      white-space: pre-line;
-      font-size: 1rem;
-      line-height: 1.6;
+    40% {
+      clip: rect(0, 900px, 0, 0);
+      transform: translate(0);
     }
-    .typing {
-      border-right: 2px solid #00ffcc;
-      display: inline-block;
-      animation: blink 1s steps(1) infinite;
+    60% {
+      clip: rect(0, 900px, 15px, 0);
+      transform: translate(2px, 2px);
     }
-    @keyframes blink {
-      50% { border-color: transparent; }
+    80% {
+      clip: rect(0, 900px, 0, 0);
+      transform: translate(0);
     }
-  </style>
+    100% {
+      clip: rect(0, 900px, 0, 0);
+      transform: translate(0);
+    }
+  }
+  @keyframes glitchBottom {
+    0% {
+      clip: rect(0, 900px, 0, 0);
+      transform: translate(0);
+    }
+    20% {
+      clip: rect(15px, 900px, 30px, 0);
+      transform: translate(2px, 2px);
+    }
+    40% {
+      clip: rect(0, 900px, 0, 0);
+      transform: translate(0);
+    }
+    60% {
+      clip: rect(15px, 900px, 30px, 0);
+      transform: translate(-2px, -2px);
+    }
+    80% {
+      clip: rect(0, 900px, 0, 0);
+      transform: translate(0);
+    }
+    100% {
+      clip: rect(0, 900px, 0, 0);
+      transform: translate(0);
+    }
+  }
+</style>
 </head>
 <body>
-  <div class="terminal">
-    <div class="output" id="output">
-      <div><strong>SilBeni 2.0 Başlatılıyor...</strong></div>
-    </div>
-  </div>
-  <script>
-    const lines = [
-      '👁️  Sistem taranıyor...',
-      '🧠  Kullanıcı izleri tespit edildi.',
-      '📂  Hedefler yükleniyor (targets.txt)...',
-      '🔍  37 veri bağlantısı bulundu.',
-      '⛓️  Bağlantılar analiz ediliyor...',
-      '💣  Gölgeleştirme süreci başlatıldı.',
-      '🗑️  facebook.com/kullanici123 siliniyor...',
-      '[OK] Profil bağlantısı yok edildi.',
-      '🗑️  instagram.com/anon.ist siliniyor...',
-      '[OK] Görsel geçmiş temizlendi.',
-      '⚠️  linkedIn.com/profil999: Silinemedi (şirket ağı içinde).',
-      '🔒  anonymous@mail.com: Hukuki işlem başlatıldı.',
-      '💬  Sessiz mod etkinleştirildi. Veri hareketi izlenmiyor.',
-      '🌒  Dijital gölge tamamlandı. Kullanıcı görünmez modda.',
-      '✅  Silme işlemleri tamamlandı: 37 işlem, 29 başarı, 5 hatalı, 3 inceleme altında.',
-      '\n📄  Detaylı log için: log.txt\n📜  Simülasyon tamamlandı. Çıkmak için sayfayı kapatın.'
-    ];let output = document.getElementById('output');
-let i = 0;
+<canvas id="matrix"></canvas>
+<div id="terminal"></div>
 
-function typeLine() {
-  if (i < lines.length) {
-    let line = document.createElement('div');
-    line.innerHTML = `<span class='typing'>${lines[i]}</span>`;
-    output.appendChild(line);
-    output.scrollTop = output.scrollHeight;
-    i++;
-    setTimeout(() => {
-      document.querySelectorAll('.typing').forEach(e => e.classList.remove('typing'));
-      typeLine();
-    }, 1200);
+<script>
+// MATRIX BACKGROUND EFFECT
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+let width, height;
+const letters = '01';
+let fontSize = 16;
+let columns;
+
+function setup() {
+  width = window.innerWidth;
+  height = window.innerHeight;
+  canvas.width = width;
+  canvas.height = height;
+  columns = Math.floor(width / fontSize);
+  drops = [];
+  for (let i = 0; i < columns; i++) {
+    drops[i] = Math.random() * height;
   }
 }
 
-window.onload = () => {
-  setTimeout(typeLine, 1000);
-};
+function draw() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+  ctx.fillRect(0, 0, width, height);
 
-  </script>
+  ctx.fillStyle = '#00ff99';
+  ctx.font = fontSize + 'px monospace';
+
+  for (let i = 0; i < columns; i++) {
+    let text = 
+letters.charAt(Math.floor(Math.random() *
+letters.length));
+    ctx.fillText(text, i * fontSize, drops[i] *
+fontSize);
+
+    if (drops[i] * fontSize > height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+    drops[i]++;
+  }
+}
+
+window.addEventListener('resize', () => {
+  setup();
+});
+setup();
+setInterval(draw, 35);
+
+// TERMINAL & TYPEWRITER + GLITCH + AUDIO EFFECTS
+
+const terminal = document.getElementById('terminal');
+let audioCtx;
+let clickBuffer;
+
+async function loadClickSound() {
+  audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const response = await fetch('https://cdn.jsdelivr.net/gh/yunustaymur/sounds/click.mp3').catch(() => null);
+  if (!response) return;
+  const arrayBuffer = await response.arrayBuffer();
+  clickBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+}
+
+function playClick() {
+  if (!clickBuffer) return;
+  const source = audioCtx.createBufferSource();
+  source.buffer = clickBuffer;
+  source.connect(audioCtx.destination);
+  source.start(0);
+}
+
+function typeWriter(text, element, speed = 50, glitch = false) {
+  return new Promise(resolve => {
+    let i = 0;
+    function type() {
+      if (i < text.length) {
+        element.textContent += text.charAt(i);
+        if (audioCtx) playClick();
+        i++;
+        setTimeout(type, speed);
+      } else {
+        if (glitch) {
+          element.classList.add('glitch');
+          setTimeout(() => element.classList.remove('glitch'), 1200);
+        }
+        resolve();
+      }
+    }
+    type();
+  });
+}
+
+async function promptUsername() {
+  return new Promise(resolve => {
+    const inputLine = document.createElement('div');
+    inputLine.classList.add('line');
+    inputLine.textContent = 'Kullanıcı adınızı girin: ';
+    terminal.appendChild(inputLine);
+
+    const input = document.createElement('input');
+    input.style.background = 'black';
+    input.style.color = '#00ff99';
+    input.style.font = 'inherit';
+    input.style.border = 'none';
+    input.style.outline = 'none';
+    input.style.width = '200px';
+    input.style.fontFamily = "'Share Tech Mono', monospace";
+    input.autofocus = true;
+    inputLine.appendChild(input);
+    input.focus();
+
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        const val = input.value.trim();
+        if (val.length > 0) {
+          input.disabled = true;
+          resolve(val);
+        }
+      }
+    });
+  });
+}
+
+async function runSimulation(username) {
+  const lines = [
+    `👁️ Sistem taranıyor...`,
+    `🧠 Kullanıcı izleri tespit edildi: ${username}`,
+    `📂 Hedefler yükleniyor (targets.txt)...`,
+    `🔍 37 veri bağlantısı bulundu.`,
+    `⛓️ Bağlantılar analiz ediliyor...`,
+    `💣 Gölgeleştirme süreci başlatıldı.`,
+    `🗑️ facebook.com/${username} siliniyor...`,
+    `[OK] Profil bağlantısı yok edildi.`,
+    `🗑️ instagram.com/anon.ist siliniyor...`,
+    `[OK] Görsel geçmiş temizlendi.`,
+    `⚠️ linkedIn.com/profil999: Silinemedi (şirket ağı içinde).`,
+    `🔒 anonymous@mail.com: Hukuki işlem başlatıldı.`,
+    `💬 Sessiz mod etkinleştirildi. Veri hareketi izlenmiyor.`,
+    `🌒 Dijital gölge tamamlandı. Kullanıcı görünmez modda.`,
+    `✅ Silme işlemleri tamamlandı: 37 işlem, 29 başarı, 5 hatalı, 3 inceleme altında.`,
+    `\n📄 Detaylı log için: log.txt`,
+    `📜 Simülasyon tamamlandı. Çıkmak için sayfayı kapatın.`
+  ];
+
+  for (const text of lines) {
+    const line = document.createElement('div');
+    line.classList.add('line');
+    terminal.appendChild(line);
+    const glitchLines = [3, 7, 10];
+    await typeWriter(text, line, 40, glitchLines.includes(lines.indexOf(text)));
+    terminal.scrollTop = terminal.scrollHeight;
+  }
+}
+
+(async () => {
+  await loadClickSound();
+  const username = await promptUsername();
+  await runSimulation(username);
+})();
+</script>
 </body>
 </html>
