@@ -1,0 +1,72 @@
+# log.txt - SilBeni Uygulaması Simülasyon Kayıt Defteri
+
+# Her bir işlem detaylı zaman damgası ile birlikte kayıt altına alınır.
+
+# Bu dosya, terminal simülasyonunun metinsel log karşılığıdır.
+
+# Gerçek veri işlenmez, yalnızca etkileşimli bir eğitim ve farkındalık aracıdır.
+
+###############################################################
+
+# 🟢 SİLME SÜRECİ BAŞLADI
+
+# Başlangıç zamanı: 2025-06-15 14:23:00
+
+###############################################################
+
+[2025-06-15 14:23:01] 📧 ahmet@example.com -> [Silme talebi alındı] 
+[2025-06-15 14:23:06] 📧 elif.kaya2020@mail.com -> [İşleme alındı] 
+[2025-06-15 14:23:10] 📧 mehmet.ozdemir@protonmail.com -> ✅ [Veri başarıyla silindi] 
+[2025-06-15 14:23:15] 📧 digital.kontrol@kvkkmail.org -> ⚠️ [Kullanıcı hesabı bulunamadı] 
+[2025-06-15 14:23:19] 📧 anonymous123@mailinator.com -> 🔒 [Hukuki değerlendirmeye alındı]
+
+[2025-06-15 14:23:25] 📱 +905551234567 -> [İşleme alındı] 
+[2025-06-15 14:23:29] 📱 +905331112233 -> ✅ [Veri başarıyla silindi] 
+[2025-06-15 14:23:33] 📱 +905075554433 -> [Silme talebi alındı]
+
+[2025-06-15 14:23:39] 👤 instagram.com/ahmetyazilim -> ✅ [Veri başarıyla silindi] 
+[2025-06-15 14:23:43] 👤 twitter.com/elif_kaya -> ⚠️ [Kullanıcı hesabı bulunamadı] 
+[2025-06-15 14:23:48] 👤 linkedin.com/in/mehmet-ozdemir-1234 -> [İşleme alındı] 
+[2025-06-15 14:23:52] 👤 reddit.com/u/anon-delete-me -> 🔒 [Hukuki değerlendirmeye alındı]
+
+[2025-06-15 14:23:56] 🌐 85.99.112.34 -> ✅ [Veri başarıyla silindi] 
+[2025-06-15 14:24:00] 🌐 10.10.20.45 -> [İşleme alındı] 
+[2025-06-15 14:24:05] 🌐 172.16.254.1 -> ⚠️ [Anonim bağlantı tespit edildi - işlem başarısız]
+
+[2025-06-15 14:24:10] 💻 GalaxyA71_IMEI_332244112233 -> [Silme talebi alındı] 
+[2025-06-15 14:24:14] 💻 MacBook-Air-2023 -> ✅ [Cihaz eşleşti, veri silindi] 
+[2025-06-15 14:24:18] 💻 Desktop-123ABC-HWID -> ⚠️ [Donanım bilgisi eksik]
+
+[2025-06-15 14:24:22] 🧾 Spotify - elif.kaya2020@mail.com -> ✅ [Hesap iptal edildi] 
+[2025-06-15 14:24:26] 🧾 Netflix - +905551234567 -> 🔒 [Abonelik aktif, işlem reddedildi] 
+[2025-06-15 14:24:30] 🧾 Online Market - ahmet@example.com -> ✅ [Alışveriş geçmişi silindi]
+
+[2025-06-15 14:24:34] 📸 Instagram Reels: reels/2938kdke8383 -> ✅ [İçerik kaldırıldı] 
+[2025-06-15 14:24:38] 📸 Tweet ID: 174839201838 -> ⚠️ [Tweet daha önce silinmiş] 
+[2025-06-15 14:24:42] 📸 YouTube Video: yt.be/xyZ123 -> 🔒 [YouTube API erişimi başarısız]
+
+[2025-06-15 14:24:46] 🔍 arama: "KVKK başvuru örneği" -> [İşleme alındı] 
+[2025-06-15 14:24:49] 🔍 form: "Erişim talebi Elif Kaya" -> ✅ [Kayıt silindi]
+
+[2025-06-15 14:24:53] ⚠️ Kamera logları: cam_08_2024-06-15.log -> 🔒 [Veri yedeklenmiş, işlem başarısız] 
+[2025-06-15 14:24:56] ⚠️ Online destek mesajı: ticket#99238 -> ✅ [Destek geçmişi silindi] 
+[2025-06-15 14:25:00] ⚠️ Uygulama çerez ID: ck01-7788xxy -> ✅ [Çerez verisi temizlendi]
+
+###############################################################
+
+# 🔴 SİLME SÜRECİ TAMAMLANDI
+
+# Kayıt sayısı: 35
+
+# Tamamlanan: 20 | Hatalı: 6 | Hukuki İnceleme: 4 | Reddedilen: 5
+
+# Bitiş zamanı: 2025-06-15 14:25:01
+
+###############################################################
+
+# Bu dosya yalnızca simülasyon içindir. Gerçek veri işleme yapılmaz.
+
+# SilBeni, dijital farkındalık artırmak ve görsel deneyim sağlamak için tasarlanmıştır.
+
+# Detaylı rapor için "silme_raporu.pdf" dosyasına bakınız.
+
