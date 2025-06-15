@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SilBeni Matrix Demo</title>
+<style>
+  body, html {
+    margin:0; padding:0; overflow:hidden; background:black; height:100%;
+  }
+  canvas {
+    display:block;
+  }
+</style>
+</head>
+<body>
+<canvas id="matrix"></canvas>
+<script>
+  const canvas = document.getElementById('matrix');
+  const ctx = canvas.getContext('2d');
+
+  let width, height;
+  let columns;
+  const fontSize = 16;
+  let drops;
+
+  function resize() {
+    width = window.innerWidth;
+    height = window.innerHeight;
+    canvas.width = width;
+    canvas.height = height;
+
+    columns = Math.floor(width / fontSize);
+    drops = [];
+    for(let i = 0; i < columns; i++) {
+      drops[i] = Math.floor(Math.random() * height / fontSize);
+    }
+  }
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.fillStyle = "#00ff00";
+    ctx.font = fontSize + "px monospace";
+
+    for(let i = 0; i < columns; i++) {
+      const text = Math.random() > 0.5 ? "1" : "0";
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if(drops[i] * fontSize > height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+  setInterval(draw, 50);
+</script>
+</body>
+  </html>
