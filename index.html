@@ -1,72 +1,93 @@
-<!DOCTYPE html><html lang="tr">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SilBeni - Dijital Temizlik Simülasyonu</title>
+  <title>SilBeni 2.0 - Dijital Gölge Simülasyonu</title>
   <style>
     body {
-      margin: 0;
+      background: #000;
+      color: #00ffcc;
       font-family: 'Courier New', monospace;
-      background: linear-gradient(to bottom, #0d0d0d, #1a1a1a);
-      color: #00ff99;
-      padding: 2rem;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
     }
     .terminal {
-      background: #000;
+      background: #0a0a0a;
+      border: 1px solid #00ffcc;
       padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 20px rgba(0,255,153,0.2);
-      max-width: 960px;
-      margin: 0 auto;
-      overflow: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 255, 204, 0.5);
+      width: 80%;
+      max-width: 900px;
+      height: 80vh;
+      overflow-y: auto;
     }
-    .terminal h1 {
-      font-size: 1.5rem;
-      color: #00ff99;
-      border-bottom: 1px solid #00ff99;
-      padding-bottom: 0.5rem;
-    }
-    .terminal pre {
-      color: #66ffcc;
-      font-size: 0.95rem;
+    .output {
+      white-space: pre-line;
+      font-size: 1rem;
       line-height: 1.6;
     }
-    .footer {
-      margin-top: 2rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: #777;
+    .typing {
+      border-right: 2px solid #00ffcc;
+      display: inline-block;
+      animation: blink 1s steps(1) infinite;
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
   </style>
 </head>
 <body>
   <div class="terminal">
-    <h1>SilBeni v1.0.0 - KVKK Temelli Dijital Silme Simülasyonu</h1>
-    <pre>
-Kullanıcı: Yunus Taymur
-Komut: ./silbeni.py targets.txt
-      
-📁 Hedef Listesi: targets.txt 
-
-🧠 Yüklenen hedef sayısı: 35 
-     
-🟢 Silme süreci başlatılıyor...
-
-[OK] ahmet@example.com silindi. 
-      
-[OK] instagram.com/ahmetyazilim silindi. 
-     
-[HATA] linkedin.com/in/mehmet-ozdemir-1234 bulunamadı. 
-     
-[İNCELEME] anonymous123@mailinator.com hukuki değerlendirmeye alındı. ...
-
-🔴 Süreç tamamlandı: 35 hedef işlendi 
-      ✅ Başarılı: 20 | ⚠️ Hatalı: 6 | 🔒 İnceleme: 4 | ❌ Reddedilen: 5 📄 Kayıt: log.txt | 📑 Rapor: silme_raporu.pdf 
-    </pre>
-
+    <div class="output" id="output">
+      <div><strong>SilBeni 2.0 Başlatılıyor...</strong></div>
+    </div>
   </div>
-  <div class="footer">
-    © 2025 SilBeni | Açık kaynak proje · GitHub üzerinden erişilebilir.
-  </div>
+  <script>
+    const lines = [
+      '👁️  Sistem taranıyor...',
+      '🧠  Kullanıcı izleri tespit edildi.',
+      '📂  Hedefler yükleniyor (targets.txt)...',
+      '🔍  37 veri bağlantısı bulundu.',
+      '⛓️  Bağlantılar analiz ediliyor...',
+      '💣  Gölgeleştirme süreci başlatıldı.',
+      '🗑️  facebook.com/kullanici123 siliniyor...',
+      '[OK] Profil bağlantısı yok edildi.',
+      '🗑️  instagram.com/anon.ist siliniyor...',
+      '[OK] Görsel geçmiş temizlendi.',
+      '⚠️  linkedIn.com/profil999: Silinemedi (şirket ağı içinde).',
+      '🔒  anonymous@mail.com: Hukuki işlem başlatıldı.',
+      '💬  Sessiz mod etkinleştirildi. Veri hareketi izlenmiyor.',
+      '🌒  Dijital gölge tamamlandı. Kullanıcı görünmez modda.',
+      '✅  Silme işlemleri tamamlandı: 37 işlem, 29 başarı, 5 hatalı, 3 inceleme altında.',
+      '\n📄  Detaylı log için: log.txt\n📜  Simülasyon tamamlandı. Çıkmak için sayfayı kapatın.'
+    ];let output = document.getElementById('output');
+let i = 0;
+
+function typeLine() {
+  if (i < lines.length) {
+    let line = document.createElement('div');
+    line.innerHTML = `<span class='typing'>${lines[i]}</span>`;
+    output.appendChild(line);
+    output.scrollTop = output.scrollHeight;
+    i++;
+    setTimeout(() => {
+      document.querySelectorAll('.typing').forEach(e => e.classList.remove('typing'));
+      typeLine();
+    }, 1200);
+  }
+}
+
+window.onload = () => {
+  setTimeout(typeLine, 1000);
+};
+
+  </script>
 </body>
-  </html>
+</html>
