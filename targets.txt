@@ -1,0 +1,94 @@
+# targets.txt - SilBeni Uygulaması için Kullanıcıya Ait Silinmesi Talep Edilen Dijital Veriler
+
+# Bu liste, terminal simülasyonu sırasında işlenecek verileri içermektedir.
+
+# Kullanıcı bu dosyayı kendi verileriyle özelleştirebilir. Her veri bir satıra yazılmalıdır.
+
+########################################
+
+# 📧 E-posta Adresleri
+
+ahmet@example.com 
+elif.kaya2020@mail.com 
+mehmet.ozdemir@protonmail.com 
+digital.kontrol@kvkkmail.org 
+anonymous123@mailinator.com
+
+########################################
+
+# 📱 Telefon Numaraları
+
++905551234567 
++905331112233 
++905075554433
+
+########################################
+
+# 👤 Sosyal Medya Hesapları / Profilleri
+
+instagram.com/ahmetyazilim 
+twitter.com/elif_kaya 
+linkedin.com/in/mehmet-ozdemir-1234 
+tiktok.com/@gizlihesap1 
+facebook.com/ahmet.gizli
+
+########################################
+
+# 🌐 IP Adresleri (Son Girişler / Erişim Logları)
+
+192.168.1.101 
+85.99.112.34 
+10.10.20.45 
+172.16.254.1
+
+########################################
+
+# 💻 Cihaz Bilgileri ve Tanımlayıcılar
+
+MacBook-Air-2023 
+GalaxyA71_IMEI_332244112233 
+Desktop-123ABC-HWID 
+Windows10_User_XYZ
+
+########################################
+
+# 📝 Web Kayıtları / Arama Geçmişi / Form Girdileri
+
+arama: "KVKK başvuru örneği" 
+arama: "kişisel verileri sildirme" 
+form: "2024 açık veri formu yanıtı" 
+form: "Erişim talebi Elif Kaya"
+
+########################################
+
+# 🧾 Ödeme ve Abonelik Bilgileri (isteğe bağlı)
+
+Spotify - elif.kaya2020@mail.com 
+Netflix - +905551234567 
+Online Market - ahmet@example.com
+
+########################################
+
+# 📸 Medya ve İçerik Paylaşımları (ID veya link)
+
+Tweet ID: 174839201838 
+Instagram Reels: reels/2938kdke8383 
+YouTube Video: yt.be/xyZ123 
+Reddit: reddit.com/u/anon-delete-me
+
+########################################
+
+# ⚠️ Diğer (Kullanıcı tanımlı özel kayıtlar)
+
+Kamera logları: cam_08_2024-06-15.log 
+Uygulama çerez ID: ck01-7788xxy 
+Online destek mesajı: ticket#99238
+
+# Bu liste interaktif simülasyon sırasında terminalde işlenecek ve log.txt ile belge/silme_raporu.pdf dosyalarına yansıtılacaktır.
+
+# Boş satırlar veya # ile başlayan satırlar yok sayılır. Açıklama satırlarıdır.
+
+# Veri güvenliği açısından gerçek bilgiler girerken dikkatli olunuz.
+
+# SilBot tarafından işlenecek her veri için anlamlı, çeşitli örnekler girilmelidir.
+
